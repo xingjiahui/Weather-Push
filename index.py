@@ -83,8 +83,7 @@ def qmsgPush(qqNum, dataList, qmsgKey):
     return getApi('qmsg', qmsgUrl, qmsgParams)
 
 
-# def main_handler(event, context):
-if __name__ == '__main__':
+def main_handler(event, context):
     file = open('userData.yml', 'r', encoding="utf-8")
     file_data = file.read()
     file.close()
