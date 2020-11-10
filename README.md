@@ -1,20 +1,32 @@
 # Weather-Push
 
-QQ推送今日天气（python+云函数）
+QQ、群推送今日天气（python+云函数）
 
 github项目地址：https://github.com/xingjiahui/Weather-Push
 
 # 介绍
 
+## 功能介绍
+
+- 支持推送到QQ、群，数目无限制
+- 不同QQ、群可推送不同地区天气
+- 推送内容丰富（日期，地区，天气，最高气温，最低气温，当前气温，风向，风力，空气指数，pm2.5指数，运动指数，天气小提示，能见度等内容）
+
 ## 运行界面
 
 1. 执行日志：
 
-   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/7ffc20db4830f8554849cb6c01951084.png" width="70%"/>
+   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/bbc3f72840f5c7ba845edb9beae38af2.png" width="70%"/>
 
 2. QQ推送：
 
-   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/00a48936d897a9d7d6a9af0c61b8e86c.png" width="50%"/>
+   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/55ed82d679b0bfa6fa588763a87e0c14.png" width="70%"/>
+   
+3. 群推送：
+
+   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/3225d04005669f4812ffc8c0d0b961c9.png" width="70%"/>
+
+   注意：为了降低接口压力和避免不必要问题，两次推送强制间隔20s+。
 
 ## 使用须知
 
@@ -22,9 +34,8 @@ github项目地址：https://github.com/xingjiahui/Weather-Push
 
    <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/e7d342f9854e007545d4f373e5debe79.png" width="70%"/>
 
-2. 所有获取推送消息的QQ均需要添加QQ机器人为好友（不然怎么给你推送）
+2. 所有接收推送的QQ、群均需要添加机器人为好友（不然怎么给你推送）
 
-3. QQ机器人可能会出现消息重复推送的问题（机器人接口问题，等待作者修复）
 
 ## 语言库
 
@@ -45,24 +56,15 @@ github项目地址：https://github.com/xingjiahui/Weather-Push
 
    <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/8dbab4406941f24cfca997c2ff99d339.png" width="70%"/>
 
-   注意：尽管云函数有直接上传zip的选项，但我尝试了几次均上传失败，所以务必要进行此步骤
+   注意：尽管云函数有直接上传zip的选项，但我尝试了几次均上传失败，所以请务必解压后上传。
 
-## 获取QmsgKey
+## 添加好友
 
-1. 进入 [Qmsg官网](https://qmsg.zendee.cn/) 登录获取接口地址（QmsgKey）
-2. 接口获取教程：https://plushine.cn/34430.html#%E6%8F%90%E9%86%92%E5%8A%9F%E8%83%BD
+1. qq扫描二维码，添加该机器人为好友：
 
-3. 注意：
+   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/de589671f1a0cda2eff145a15324bad2.png" width="30%"/>
 
-   - 选择qmsg酱时一定要选择 `消息推送服务`：
-
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/691326bf67604d5c4c59d4fc2637883d.png" width="70%"/>
-
-   - 添加要推送天气的QQ：
-
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/39ab26b2d16c3b4675b02cfb9481ff87.png" width="70%"/>
-
-     注意：作者暂未开放推送消息到QQ群
+2. 群推送：添加好友后，将其拉入群聊（注意保护群聊隐私）。
 
 ## 创建云函数
 
@@ -85,7 +87,12 @@ github项目地址：https://github.com/xingjiahui/Weather-Push
 4. 填写 `函数配置`：
 
    - 描述：QQ推送今日天气（python+云函数）
-   - 其余均为默认，点击 `完成`
+
+   - 高级配置：
+
+     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/bf3ee3ec6efb2f04c0da3cb689dc221c.png" width="70%"/>
+
+   - 其余配置项默认即可，点击完成
 
 5. 按下图 `上传` 前面解压的文件夹，点击 `保存`：
 
@@ -97,41 +104,21 @@ github项目地址：https://github.com/xingjiahui/Weather-Push
 
 ## 配置文件
 
-1. 查找所在城市dirId：
+1. 打开配置文件：左侧文件树中找到 `userData.yml` 文件，双击打开：
 
-   - 左侧文件树中找到 `dirId.csv` 文件，双击打开：
+   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/acd985156af55ce53ede998a70e2550d.png" width="70%"/>
 
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/a2d11d5b017ae37898bc3130359f01a2.png" width="70%"/>
+   注意：填写完成后，按下快捷键：`ctrl+s` 保存修改
 
-   - 快捷键： `ctrl+f` ，输入城市名（烟台为例）按下回车，复制后面对应的dirId：
+2. 推送到QQ：
 
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/f7672cf458df5aa4c5fea0e11ed2eb59.png" width="70%"/>
+   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/ec1c9d12e466ebe0f34bc8fab285fbc0.png" width="70%"/>
 
-2. 填写配置文件：
+3. 推送到QQ群：
 
-   - 左侧文件树中找到 `userData.yml` 文件，双击打开：
+   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/09/46bf7e087ec046614b37e8a82ca30e0a.png" width="70%"/>
 
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/2e6541b5d1aa08901483b0207bc3b69e.png" width="70%"/>
-
-   - 按照下图填写配置：
-
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/b87e1c139300a17352553212bffe39e9.png" width="70%"/>
-
-     注意：填写完成后，按下快捷键：`ctrl+s` 保存修改
-
-3. 可不可以同时给多个用户发送多地天气呢？可以的，按照下图添加城市信息就可以实现啦！
-
-   - qmsg官网添加要推送的QQ：
-
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/39ab26b2d16c3b4675b02cfb9481ff87.png" width="70%"/>
-
-     注意：记得添加机器人为好友才能收到消息呀！
-
-   - 按照下图格式在 `userData.yml` 中添加城市信息：
-
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/175a092e6ba66dec0f99c487bb9974b7.png" width="70%"/>
-
-     注意：严格按照上图格式添加新城市信息
+   注意：要添加多个QQ、群时，按序号依次添加即可，注意缩进。
 
 ## 测试运行
 
@@ -143,27 +130,27 @@ github项目地址：https://github.com/xingjiahui/Weather-Push
 
    - 执行日志：
 
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/a786d736e02c56133d5d6bd67cd349c3.png" width="70%"/>
+     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/bbc3f72840f5c7ba845edb9beae38af2.png" width="70%"/>
 
-   - QQ推送：
+   - QQ、群推送：
 
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/e98e6e481920ae31efb0ce59e7881911.png" width="30%"/>
+     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/cad8c973acc2df9ede4bf5e36f9310e7.png" width="40%"/>
 
    - 今日天气：
 
-     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/00a3d31838073bc2158cbc39ebfd068c.png" width="50%"/>
+     <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/ada05801aa1fd3e53852ddb9d5abe482.png" width="70%"/>
 
 # 脚本维护
 
 ## 定时触发
 
-1. 按照下图操作：
+1. 创建触发器：
 
-   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/440eab62174e21c346c9f2097261ec0f.png" width="90%"/>
+   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/440eab62174e21c346c9f2097261ec0f.png" width="70%"/>
 
 2. 运行结果：
 
-   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/10/17/3c127ca0e99818054724ab1edde11150.png" width="50%"/>
+   <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/8ed89283594131b858a4c4fd205afa48.png" width="70%"/>
 
    注意：不要尝试与推送机器人对话，他不会回复你的
 
@@ -172,16 +159,60 @@ github项目地址：https://github.com/xingjiahui/Weather-Push
 1. 项目 issues 地址：https://github.com/xingjiahui/Weather-Push/issues
 2. 作者博客留言板：https://plushine.cn/messageboard/
 
+## 更新日志
+
+- `v2.0` 2020.11.10
+
+  - 修复因云函数重复执行导致的重复推送问题
+
+  - 修复因qmsg缓存异常导致的推送昨日天气的bugs
+
+  - 弃用 `高德地图` api、`一言` api、`Qmsg酱` api
+
+  - 简化配置，支持同时推送到QQ和群
+
+  - 不同QQ、群可推送不同地区天气
+
+  - 丰富推送内容（显示今日天气对应表情）
+
+  - 项目快照：
+
+    <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/55ed82d679b0bfa6fa588763a87e0c14.png" width="70%"/>
+
+- `v1.0` 2020.10.17
+
+  - 通过高德地图api获取天气信息
+
+  - 支持多用户（多地区）天气推送
+
+  - 推送内容添加 `一言` 短句
+
+  - 脚本支持部署到云函数
+
+  - 项目快照：
+
+    <img src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/11/10/37933c73b83219eae0e887e61f88d2b0.png" width="70%"/>
+
+## 声明
+
+- 此脚本是作者利用业余时间所写，禁止用于商业、非法用途 
+- 此脚本无任何恶意代码，但可能存在些许bug，因此所造成的损失与本人无关 
+- 使用、运行本脚本即代表同意上述声明
+
 # 感谢
 
 1. 服务支持：
-   - [高德地图](https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#t1)：提供免费天气API
+   - ~~[高德地图](https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#t1)：提供免费天气API~~
    - [腾讯云函数](https://cloud.tencent.com/product/scf)：触发、执行python项目
-   - [Qmsg酱](https://qmsg.zendee.cn/)：QQ消息推送API
-   - [一言](https://api.uixsj.cn/hitokoto/index.html)：一言API
+   - ~~[Qmsg酱](https://qmsg.zendee.cn/)：QQ消息推送API~~
+   
+   - ~~[一言](https://api.uixsj.cn/hitokoto/index.html)：一言API~~
+   - [QQPusher](http://qqpusher.yanxianjun.com/doc/)：QQ、QQ群消息推送API
+   - [实况天气](https://tianqiapi.com/index/doc?version=v61)：天气APi
 2. 技术支持：
    - [博客园-阿宅gogo](https://www.cnblogs.com/wbw-test/p/11580887.html)：python发送get请求
    - [CSDN-站在风口](https://blog.csdn.net/abby1559/article/details/79971957)：python字典初始化
    - [CSDN-占海](https://blog.csdn.net/chenzhanhai/article/details/106782325)：腾讯云函数添加依赖函数库
    - [CSDN-marselha](https://blog.csdn.net/marselha/article/details/91872832)：关于UnicodeDecodeError: 'gbk' codec can't decode byte 的解决方法
    - [CSDN-GhostRiderQin](https://blog.csdn.net/qq_40986486/article/details/103934408)：python加载YAML文件警告：YAMLLoadWarning: calling yaml.load() without... 的解决方法
+   - [工具邦](http://cn.piliapp.com/emoji/list/weather/)：天气表情
