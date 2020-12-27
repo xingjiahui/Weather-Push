@@ -28,8 +28,8 @@ def getWeather(dirItem):
     weatherParams = {'key': 'c369a5115a88fe279e8c6de3ba5fd8c7',
                      'extensions': 'all',
                      'version': 'v61',
-                     'appid': '95151212',
-                     'appsecret': 'P7UmmAbw',
+                     'appid': '37964223',
+                     'appsecret': '1mnzfhBP',
                      'province': dirItem[0],
                      'city': dirItem[1],
                      }
