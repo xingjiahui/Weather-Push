@@ -1,3 +1,5 @@
+# 暂停维护！
+
 # Weather-Push
 
 QQ、群推送今日天气（python+云函数）
